@@ -20,6 +20,7 @@ elif equation_type == "wave":
     from packs.initial_function.wave_init import *
     from packs.reference_generation.wave_ref import *
 
+
 x = torch.linspace(0, 1, x_step + 1)
 t = torch.linspace(0, time, t_step + 1)
 x = torch.stack([x for _ in range(t_step + 1)]).unsqueeze(-1)
@@ -146,6 +147,8 @@ for trial in range(trials):
                 rec__phys_loss.append(phys_loss.item())
                 rec__cond_loss.append(cond_loss.item())
             rec__error.append(error.item())
+            if error.item() <= min(rec__error):
+                torch.save(model.state_dict(), "model_params/" + equation_type + '/' + name + "_" + str(trial) + ".pth")
         if epoch % show_epoch == 0:
             if task_type != "dl":
                 print(f'\n'
@@ -247,3 +250,4 @@ for trial in range(trials):
     rd_name = folder + '\\data\\' + equation_type + '\\' + name + "_" + str(trial) + '.csv'
     with open(rd_name, 'w+'):
         np.savetxt(rd_name, sv, delimiter=',', fmt='%.6f')
+        
