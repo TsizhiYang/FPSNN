@@ -2,6 +2,7 @@
 Code for "Physics-informed Spiking Neural Networks for Continuous-Time Dynamic Systems".
 
 ## Contents
+'''
 FPSNN/
   data/                   
     # error and loss data
@@ -22,3 +23,4 @@ FPSNN/
     # plots model solutions and errors
   main.py
     # training models
+'''
